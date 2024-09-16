@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="{% static 'trivia/style.css' %}">
 </head>
 <body>
-    <h1>{{ random_q }}</h1>
-    <!-- <button>See Answer</button> -->
-    <h2>Answer: {{ random_q.answer_text }}</h2>
+    {% for q in random_q %}
+        <h1>{{ q }}</h1>
+        <h2>{{ q.answer_text }}</h2>
+        <br>
+    {% endfor %}
 </body>
 </html>
