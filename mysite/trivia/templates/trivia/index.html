@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{% static 'trivia/style.css' %}">
 </head>
 <body>
-    <h1>{{ question }}</h1>
+    <h1>Question:</h1>
+    <h2>{{ question }}</h2>
     <button onClick="toggleText()">Show Answer</button>
     <div id="hidden-text" style="display: none">
         <h2>{{ question.answer_text}}</h2>
