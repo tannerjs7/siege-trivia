@@ -8,12 +8,18 @@ import random
 
 # Add 404 exceptions
 
+
 def index(request):
-    # random_q = random.choice(Question.objects.all())
-    random_q = list(Question.objects.all())
-    random.shuffle(random_q)
-    context = {'random_q': random_q}
-    return render(request, 'trivia/index.html', context)
+    questions = Question.objects.all()
+    seen_questions = request.session.get('seen_questions', [])
+    available_questions = [q for q in questions if q.id not in seen_questions]
+    if not available_questions:
+        seen_questions = []
+        available_questions = questions
+    question = random.choice(available_questions)
+    seen_questions.append(question.id)
+    request.session['seen_questions'] = seen_questions
+    return render(request, 'trivia/index.html', {'question': question})
 
 
 def detail(request):

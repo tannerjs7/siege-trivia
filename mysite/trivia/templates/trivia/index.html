@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trivia</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'trivia/style.css' %}">
 </head>
 <body>
-    {% for q in random_q %}
-        <h1>{{ q }}</h1>
-        <h2>{{ q.answer_text }}</h2>
-        <br>
-    {% endfor %}
+    <h1>{{ question }}</h1>
+    <button onClick="toggleText()">Show Answer</button>
+    <div id="hidden-text" style="display: none">
+        <h2>{{ question.answer_text}}</h2>
+        <form method="get" action="{% url 'trivia:index' %}">
+            <button type="submit">Next Question</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleText() {
+            let textElement = document.getElementById('hidden-text');
+            if (textElement.style.display == "none") {
+                textElement.style.display = "block";
+            } else {
+                textElement.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
