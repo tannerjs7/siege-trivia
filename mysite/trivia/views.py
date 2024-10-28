@@ -22,10 +22,10 @@ def index(request):
     return render(request, 'trivia/index.html', {'question': question})
 
 
-def detail(request):
+def suggestions(request):
     all_suggestions = list(Suggestion.objects.all())
     context = {'all_suggestions': all_suggestions}
-    return render(request, 'trivia/detail.html', context)
+    return render(request, 'trivia/suggestions.html', context)
 
 
 def suggest(request):
@@ -36,9 +36,9 @@ def suggest(request):
             suggested_date=datetime.now()
         )
     except (KeyError, Suggestion.DoesNotExist):
-        return render(request, 'trivia/detail.html', {
+        return render(request, 'trivia/suggestions.html', {
             'error_message': 'Try again.'
         })
     else:
         suggestion.save()
-        return HttpResponseRedirect(reverse('trivia:detail'))
+        return HttpResponseRedirect(reverse('trivia:suggestions'))
