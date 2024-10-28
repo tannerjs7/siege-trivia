@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
-from .models import Question, Suggestion
+from .models import Question
 from datetime import datetime
 import random
 
@@ -10,7 +10,7 @@ import random
 
 
 def index(request):
-    questions = Question.objects.all()
+    questions = Question.objects.filter(suggested=False)
     seen_questions = request.session.get('seen_questions', [])
     available_questions = [q for q in questions if q.id not in seen_questions]
     if not available_questions:
@@ -23,19 +23,20 @@ def index(request):
 
 
 def suggestions(request):
-    all_suggestions = list(Suggestion.objects.all())
+    all_suggestions = list(Question.objects.filter(suggested=True))
     context = {'all_suggestions': all_suggestions}
     return render(request, 'trivia/suggestions.html', context)
 
 
 def suggest(request):
     try:
-        suggestion = Suggestion(
-            suggestion_text=request.POST['question'],
+        suggestion = Question(
+            question_text=request.POST['question'],
             answer_text=request.POST['answer'],
-            suggested_date=datetime.now()
+            created_date=datetime.now(),
+            suggested=True
         )
-    except (KeyError, Suggestion.DoesNotExist):
+    except (KeyError, Question.DoesNotExist):
         return render(request, 'trivia/suggestions.html', {
             'error_message': 'Try again.'
         })
