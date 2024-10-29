@@ -1,35 +1,41 @@
+{% extends 'trivia/base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suggestions</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trivia/style.css' %}">
+    {% endblock %}
 </head>
 <body>
+    {% block body %}
     <h1>Make a suggestion</h1>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
     <form action="{% url 'trivia:suggest' %}" method="post">
         {% csrf_token %}
-        Question: <input type="text" name="question">
-        <br>
-        Answer: <input type="text" name="answer">
-        <br>
-        <input type="submit" value="submit">
-        <br>
-        <h1>Current Suggestions:</h1>
-        {% for suggestion in all_suggestions %}
-            <div>
-                <span>Question {{ forloop.counter }}:</span>
-                <span>{{ suggestion }}</span>
-            </div>
-            <div>
-                <span>Answer {{ forloop.counter }}:</span>
-                <span>{{ suggestion.answer_text }}</span>
-            </div>
-            <br/>
-        {% endfor %}
+        <div id="input-question">Question: <textarea name="question" cols="99" rows="3" required></textarea></div>
+        <div id="input-answer">Answer: <textarea name="answer" cols="100" rows="3" required></textarea></div>
+        <div><input type="submit" value="submit"></div>
     </form>
+
+    <h1>Current Suggestions</h1>
+    {% for suggestion in all_suggestions %}
+        <div>
+            <span>Question {{ forloop.counter }}:</span>
+            <span>{{ suggestion }}</span>
+        </div>
+        <div>
+            <span>Answer {{ forloop.counter }}:</span>
+            <span>{{ suggestion.answer_text }}</span>
+        </div>
+        <br/>
+    {% endfor %}
+    {% endblock %}
 </body>
 </html>

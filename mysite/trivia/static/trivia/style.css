@@ -8,3 +8,20 @@ h2 {
     border: 1px dashed black;
     padding: 20px;
 }
+
+#input-question, #input-answer {
+    margin-bottom: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    font-size: 60px;
+    margin-bottom: 40px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siege Trivia</title>
+    {% endblock %}
+</head>
+<body>
+    {% block navbar %}
+    <nav>
+        <a href="{% url 'trivia:index' %}">Trivia</a>
+        <a href="{% url 'trivia:suggestions' %}">Suggestions</a>
+        <a href="{% url 'admin:index' %}">Admin</a>
+    </nav>
+    {% endblock %}
+    {% block body %}
+    <div>Body</div>
+    {% endblock %}
+</body>
+</html>
