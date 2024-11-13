@@ -15,8 +15,9 @@
     {% block body %}
     <h1>Question</h1>
     <h2>{{ question }}</h2>
-    <button onClick="toggleText()">Show Answer</button>
+    <button onClick="toggleText()">Toggle Answer</button>
     <div id="hidden-text" style="display: none">
+        <h1>Answer</h1>
         <h2>{{ question.answer_text}}</h2>
         <form method="get" action="{% url 'trivia:index' %}">
             <button type="submit">Next Question</button>

@@ -4,11 +4,6 @@ body {
     text-align: center;
 }
 
-h2 {
-    border: 1px dashed black;
-    padding: 20px;
-}
-
 #input-question, #input-answer {
     margin-bottom: 10px;
 }
@@ -18,7 +13,7 @@ nav {
     justify-content: space-evenly;
     border: 1px solid black;
     font-size: 60px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 nav a {
