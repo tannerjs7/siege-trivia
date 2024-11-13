@@ -8,7 +8,6 @@ import random
 
 # Add 404 exceptions
 
-
 def index(request):
     questions = Question.objects.filter(suggested=False)
     seen_questions = request.session.get('seen_questions', [])
@@ -43,3 +42,8 @@ def suggest(request):
     else:
         suggestion.save()
         return HttpResponseRedirect(reverse('trivia:suggestions'))
+    
+def questions(request):
+    all_suggestions = list(Question.objects.filter(suggested=False))
+    context = {'all_suggestions': all_suggestions}
+    return render(request, 'trivia/questions.html', context)

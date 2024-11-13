@@ -1,0 +1,30 @@
+{% extends 'trivia/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trivia/style.css' %}">
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+    <h1>All Questions</h1>
+    {% for suggestion in all_suggestions %}
+        <div>
+            <span>Question {{ forloop.counter }}:</span>
+            <span>{{ suggestion }}</span>
+        </div>
+        <div>
+            <span>Answer {{ forloop.counter }}:</span>
+            <span>{{ suggestion.answer_text }}</span>
+        </div>
+        <br/>
+    {% endfor %}
+    {% endblock %}
+</body>
+</html>

@@ -19,4 +19,5 @@ nav {
 nav a {
     text-decoration: none;
     color: black;
+    font-size: calc(12px + 3vw);
 }
